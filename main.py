@@ -1,6 +1,6 @@
 from requests_html import HTMLSession
 from tqdm import trange
-import json,time,random,argparse
+import json,time,random,argparse,os
 
 parser = argparse.ArgumentParser(description='help')
 parser.add_argument('-y', dest='types', type=str, help='曲包类型. e.g. S/SM/ST/SC')
@@ -45,7 +45,8 @@ for i in trange(args.frst, args.end+1):
             "name": t
         }
         link[i] = data
-    # os.system(f"mega-get {list(links)[0]} ./")
+    # os.system(f"mega-get {list(links)[0]} ./") on Windows
+    # os.system(f"mega-exec get {list(links)[0]} ./") on Linux
 
 with open(args.out, "w") as f:
     json.dump(link, f, indent=4)
