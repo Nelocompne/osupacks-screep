@@ -46,8 +46,8 @@ for i in trange(args.frst, args.end+1):
             "name": t
         }
         link[i] = data
-    # os.system(f"mega-get {list(links)[0]} {args.output}") on Windows
-    # os.system(f"mega-exec get {list(links)[0]} {args.output}") on Linux
+    #os.system(f"mega-get {list(links)[0]} {args.output}") # on Windows
+    #os.system(f"mega-exec get {list(links)[0]} {args.output}") # on Linux
 
 with open(args.out, "w") as f:
     json.dump(link, f, indent=4)
