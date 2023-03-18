@@ -9,6 +9,7 @@ parser.add_argument('-e', dest='end', type=int, help='截止编号')
 parser.add_argument('-o', dest='out', type=str, help='输出文件名(.json)')
 parser.add_argument('-t', dest='time', type=int, help='最长延迟时间(秒/s). 防止触发反爬')
 parser.add_argument('-c', dest='cookies', type=str, help='osu登录cookies文件')
+parser.add_argument('-p', dest='output', type=str, help='下载目录')
 args = parser.parse_args()
 
 session = HTMLSession()
@@ -45,8 +46,8 @@ for i in trange(args.frst, args.end+1):
             "name": t
         }
         link[i] = data
-    # os.system(f"mega-get {list(links)[0]} ./") on Windows
-    # os.system(f"mega-exec get {list(links)[0]} ./") on Linux
+    # os.system(f"mega-get {list(links)[0]} {args.output}") on Windows
+    # os.system(f"mega-exec get {list(links)[0]} {args.output}") on Linux
 
 with open(args.out, "w") as f:
     json.dump(link, f, indent=4)
