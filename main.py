@@ -47,8 +47,8 @@ for i in trange(db_star, db_andy+1):
             "name": t
         }
         link[i] = data
-    os.system(f"mega-get {list(links)[0]} {db_dlpath}") # on Windows
-    os.system(f"mega-exec get {list(links)[0]} {db_dlpath}") # on Linux
+    os.system(f"aria2c -d {db_dlpath} {list(links)[0]}") # with aria2
+    os.system(f"wget -P {db_dlpath} {list(links)[0]}") # with wget
 
 with open(db_outjson, "w") as f:
     json.dump(link, f, indent=4)
