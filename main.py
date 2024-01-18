@@ -15,6 +15,8 @@ db_outjson = config['database']['outjson']
 
 session = HTMLSession()
 
+proxy = "http://127.0.0.1:2080"
+
 with open(db_cookie, 'r') as f:
     cookies = dict(cookies_are = f.read())
 
@@ -25,7 +27,7 @@ link = dict()
 for i in trange(db_star, db_andy+1):
     try:
         time.sleep(random.uniform(1,db_time))
-        r = session.get(f"https://osu.ppy.sh/beatmaps/packs/{db_type}{i}", cookies=cookies, headers=headers)
+        r = session.get(f"https://osu.ppy.sh/beatmaps/packs/{db_type}{i}", cookies=cookies, headers=headers, proxies={'http': proxy, 'https': proxy})
         link_raw = r.html.find('div.beatmap-pack-description', first=True).find('a') # 下载链接
         for a in link_raw:
             links = a.absolute_links
@@ -47,8 +49,8 @@ for i in trange(db_star, db_andy+1):
             "name": t
         }
         link[i] = data
-    os.system(f"aria2c -d {db_dlpath} {list(links)[0]}") # with aria2
-    os.system(f"wget -P {db_dlpath} {list(links)[0]}") # with wget
+    os.system(f"aria2c --all-proxy=http://127.0.0.1:2080 -d {db_dlpath} {list(links)[0]}") # with aria2
+    # os.system(f"wget -P {db_dlpath} {list(links)[0]}") # with wget
 
 with open(db_outjson, "w") as f:
     json.dump(link, f, indent=4)
