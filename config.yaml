@@ -1,8 +1,0 @@
-database:
-  type: ST
-  star: 236
-  andy: 241
-  time: 2
-  cookie: ./cook
-  dlpath: .
-  outjson: output.json

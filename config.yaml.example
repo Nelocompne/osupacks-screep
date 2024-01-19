@@ -1,0 +1,9 @@
+database:
+  type: S
+  star: 1377
+  andy: 1379
+  time: 3
+  cookie: ../cook
+  dlpath: .
+  outjson: output.json
+  proxy: http://127.0.0.1:2080
