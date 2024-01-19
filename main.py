@@ -12,10 +12,11 @@ db_time = config['database']['time']
 db_cookie = config['database']['cookie']
 db_dlpath = config['database']['dlpath']
 db_outjson = config['database']['outjson']
+db_proxy = config['database']['proxy']
 
 session = HTMLSession()
 
-proxy = "http://127.0.0.1:2080"
+proxy = db_proxy
 
 with open(db_cookie, 'r') as f:
     cookies = dict(cookies_are = f.read())
@@ -49,7 +50,7 @@ for i in trange(db_star, db_andy+1):
             "name": t
         }
         link[i] = data
-    os.system(f"aria2c --all-proxy=http://127.0.0.1:2080 -d {db_dlpath} {list(links)[0]}") # with aria2
+    os.system(f"aria2c --all-proxy={db_proxy} -d {db_dlpath} {list(links)[0]}") # with aria2
     # os.system(f"wget -P {db_dlpath} {list(links)[0]}") # with wget
 
 with open(db_outjson, "w") as f:
